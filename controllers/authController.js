@@ -32,7 +32,7 @@ exports.loginUser = async (req, res) => {
     return;
   }
 
-  const token = new JwtToken(user.id, user.credential.username);
+  const token = new JwtToken(user.id, user.credential.username, user.role);
   let loginToken = token.createToken();
 
   res.cookie("token", loginToken);

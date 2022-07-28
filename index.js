@@ -29,7 +29,7 @@ const {
   getContactDetailsIncludingDeleted,
 } = require("./controllers/contactDetailController");
 const { loginUser, logoutUser } = require("./controllers/authController");
-const { isAuthenticated } = require("./middlewares/auth");
+const { isAuthenticated, checkoutUser } = require("./middlewares/auth");
 
 // middlewares
 app.use(cors());
@@ -37,45 +37,37 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // routes
-app.post("/createuser", isAuthenticated, createUser);
-app.put("/updateuser", isAuthenticated, updateUser);
-app.delete("/deleteuser", isAuthenticated, deleteUser);
-app.post("/getuser", isAuthenticated, getUser);
-app.get("/getallusers", isAuthenticated, getAllUsers);
-app.post("/retreiveuser", isAuthenticated, retreiveUser);
-app.get(
-  "/getallusersincludingdeleted",
-  isAuthenticated,
-  getAllUsersIncludingdDeleted
-);
+app.post("/createuser", createUser);
+app.put("/updateuser", updateUser);
+app.delete("/deleteuser", deleteUser);
+app.post("/getuser", getUser);
+app.get("/getallusers", getAllUsers);
+app.post("/retreiveuser", retreiveUser);
+app.get("/getallusersincludingdeleted", getAllUsersIncludingdDeleted);
 
 // contacts
-app.post("/createcontact", isAuthenticated, createContact);
-app.put("/updatecontact", isAuthenticated, updateContact);
-app.delete("/deletecontact", isAuthenticated, deleteContact);
-app.post("/retreivecontact", isAuthenticated, retreiveContact);
-app.post("/getcontacts", isAuthenticated, getContacts);
-app.post(
-  "/getallcontactsincludingdeleted",
-  isAuthenticated,
-  getAllContactsIncludingDeleted
-);
+app.post("/createcontact", createContact);
+app.put("/updatecontact", updateContact);
+app.delete("/deletecontact", deleteContact);
+app.post("/retreivecontact", retreiveContact);
+app.post("/getcontacts", getContacts);
+app.post("/getallcontactsincludingdeleted", getAllContactsIncludingDeleted);
 
 // contact details
-app.post("/createcontactdetail", isAuthenticated, createContactDetail);
-app.put("/updatecontactdetail", isAuthenticated, updateContactDetail);
-app.delete("/deletecontactdetail", isAuthenticated, deleteContactDetail);
-app.post("/retreivecontactdetail", isAuthenticated, retreiveContactDetail);
-app.post("/getcontactdetails", isAuthenticated, getContactDetails);
+app.post("/createcontactdetail", createContactDetail);
+app.put("/updatecontactdetail", updateContactDetail);
+app.delete("/deletecontactdetail", deleteContactDetail);
+app.post("/retreivecontactdetail", retreiveContactDetail);
+app.post("/getcontactdetails", getContactDetails);
 app.post(
   "/getcontactdetailsincludingdeleted",
-  isAuthenticated,
   getContactDetailsIncludingDeleted
 );
 
 // authentication
 app.post("/login", loginUser);
-app.get("/logout", isAuthenticated, logoutUser);
+app.get("/logout", logoutUser);
+app.get("/checkoutuser", checkoutUser);
 
 // running server
 const port = 9000;

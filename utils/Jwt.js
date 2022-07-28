@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 const secretKey = "ContactProjectSecretKey";
 
 class JwtToken {
-  constructor(userId, username) {
+  constructor(userId, username, role) {
     this.userid = userId;
     this.username = username;
+    this.role = role;
     this.isValid = true;
   }
 
